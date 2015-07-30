@@ -2,8 +2,11 @@ group 'dius'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
+
+mainClassName = 'dius.App'
 
 repositories {
     mavenCentral()
