@@ -1,6 +1,8 @@
 package dius;
 
+import java.math.BigDecimal;
+
 public interface Checkout {
-    void scan();
-    double total();
+    void scan(Product item);
+    BigDecimal total();
 }
