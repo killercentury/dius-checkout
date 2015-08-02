@@ -3,6 +3,7 @@ package dius;
 import java.util.List;
 
 public class Store {
+
     private String name;
     private List<Product> productList;
 
@@ -20,5 +21,9 @@ public class Store {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public Product getProductBySKU(String sku) {
+        return productList.stream().filter(p -> p.getSku().equals(sku)).findFirst().get();
     }
 }
