@@ -6,7 +6,12 @@ import java.util.List;
 
 public class CheckoutImpl implements Checkout {
 
-    List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
+    private List<PricingRule> pricingRules = new ArrayList<>();
+
+    CheckoutImpl(List<PricingRule> pricingRules) {
+        this.pricingRules = pricingRules;
+    }
 
     @Override
     public void scan(Product product) {
@@ -14,12 +19,23 @@ public class CheckoutImpl implements Checkout {
     }
 
     public BigDecimal subTotal() {
-        return productList.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        return productList
+                .stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal discount() {
+        return pricingRules
+                .stream()
+                .map(p -> p.apply(productList))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Override
     public BigDecimal total() {
-        BigDecimal total = subTotal();
-        return total;
+        //System.out.println(subTotal());
+        //System.out.println(discount());
+        return subTotal().subtract(discount());
     }
 }
