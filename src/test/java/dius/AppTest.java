@@ -29,7 +29,7 @@ public class AppTest {
         vga = new Product("vga", "VGA adapter", new BigDecimal("30.00"));
         List<PricingRule> pricingRules = new ArrayList<>();
         pricingRules.add(new BuyXGetYFree(atv, 2, 1));
-        pricingRules.add(new BulkDiscount(ipd, 4, new BigDecimal("499.99")));
+        pricingRules.add(new BulkDiscount(ipd, 5, new BigDecimal("499.99")));
         pricingRules.add(new BundleDiscount(mbp, vga));
         checkout = new CheckoutImpl(pricingRules);
     }

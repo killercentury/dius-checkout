@@ -24,7 +24,7 @@ public class App {
         store.setProductList(productList);
         List<PricingRule> pricingRules = new ArrayList<>();
         pricingRules.add(new BuyXGetYFree(atv, 2, 1));
-        pricingRules.add(new BulkDiscount(ipd, 4, new BigDecimal("499.99")));
+        pricingRules.add(new BulkDiscount(ipd, 5, new BigDecimal("499.99")));
         pricingRules.add(new BundleDiscount(mbp, vga));
         Checkout checkout = new CheckoutImpl(pricingRules);
         checkout.scan(ipd);

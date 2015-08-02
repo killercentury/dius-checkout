@@ -9,13 +9,12 @@ import java.util.List;
 public class BulkDiscount implements PricingRule {
 
     private Product product;
-    // The quantity for valid discount should be plus 1 on this base quantity
-    private int baseQuantity;
+    private int minQuantity;
     private BigDecimal discountPrice;
 
-    public BulkDiscount(Product product, int baseQuantity, BigDecimal discountPrice) {
+    public BulkDiscount(Product product, int minQuantity, BigDecimal discountPrice) {
         this.product = product;
-        this.baseQuantity = baseQuantity;
+        this.minQuantity = minQuantity;
         this.discountPrice = discountPrice;
     }
 
@@ -26,7 +25,7 @@ public class BulkDiscount implements PricingRule {
                 .stream()
                 .filter(i -> i.getSku().equals(product.getSku()))
                 .count();
-        if (quantity > baseQuantity) {
+        if (quantity >= minQuantity) {
             BigDecimal discountPerItem = product.getPrice().subtract(discountPrice);
             discount = discountPerItem.multiply(new BigDecimal(quantity));
         }
