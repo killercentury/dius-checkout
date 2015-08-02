@@ -1,5 +1,9 @@
 package dius;
 
+import dius.pricingrules.BulkDiscount;
+import dius.pricingrules.BundleDiscount;
+import dius.pricingrules.BuyXGetYFree;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,5 +22,15 @@ public class App {
         productList.add(atv);
         productList.add(vga);
         store.setProductList(productList);
+        List<PricingRule> pricingRules = new ArrayList<>();
+        pricingRules.add(new BuyXGetYFree(atv, 2, 1));
+        pricingRules.add(new BulkDiscount(ipd, 4, new BigDecimal("499.99")));
+        pricingRules.add(new BundleDiscount(mbp, vga));
+        Checkout checkout = new CheckoutImpl(pricingRules);
+        checkout.scan(ipd);
+        checkout.scan(mbp);
+        checkout.scan(atv);
+        checkout.scan(vga);
+        System.out.println(checkout.total());
     }
 }
