@@ -18,6 +18,11 @@ public class CheckoutImpl implements Checkout {
         productList.add(product);
     }
 
+    @Override
+    public void clear() {
+        productList = new ArrayList<>();
+    }
+
     public BigDecimal subTotal() {
         return productList
                 .stream()
