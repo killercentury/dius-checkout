@@ -34,6 +34,7 @@ public class AppTest {
         checkout = new CheckoutImpl(pricingRules);
     }
 
+    // simplest case to test checkout service without valid pricing rule
     @Test
     public void checkoutShouldReturnTotalOfAllItems() {
         checkout.scan(ipd);
@@ -43,6 +44,7 @@ public class AppTest {
         assertEquals(expectedTotal, checkout.total());
     }
 
+    // following are unit tests for BuyXGetYFree pricing rule
     @Test
     public void singleAppleTVShouldReturnFullPrice() {
         checkout.scan(atv);
@@ -78,6 +80,7 @@ public class AppTest {
         assertEquals(expectedTotal, checkout.total());
     }
 
+    // following are unit tests for BulkDiscount pricing rule
     @Test
     public void fourSuperIpadShouldReturnDiscountPrice() {
         IntStream.rangeClosed(1, 4).forEach(i -> checkout.scan(ipd));
@@ -92,6 +95,7 @@ public class AppTest {
         assertEquals(expectedTotal, checkout.total());
     }
 
+    // following are unit tests for BundleDiscount pricing rule
     @Test
     public void oneMacBookProShouldReturnFullPrice() {
         checkout.scan(mbp);
@@ -115,7 +119,7 @@ public class AppTest {
         assertEquals(expectedTotal, checkout.total());
     }
 
-    // Following 3 scenarios are from the instructions
+    // following are tests for scenarios from the instructions
     @Test
     public void scenario1() {
         checkout.scan(atv);
